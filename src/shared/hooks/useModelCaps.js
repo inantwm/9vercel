@@ -40,8 +40,8 @@ function loadModelCaps() {
 
 // Resolve caps from a "provider/model" string or a bare model id.
 // Defensive: combos historically stored objects {model, provider}; guard against non-strings.
-// The seat prefix is a UI alias (ocg, cmc, â€¦); the capability tables are keyed
-// by provider id (opencode-go, commandcode, â€¦), so map it before the lookup â€”
+// The seat prefix is a UI alias (ocg, cmc, …); the capability tables are keyed
+// by provider id (opencode-go, commandcode, …), so map it before the lookup —
 // an unmapped alias falls through to the generic patterns and under-reports
 // (e.g. any *claude*haiku* id reads as 200k regardless of the provider entry).
 export function resolveCaps(byFull, byId, key) {
@@ -79,7 +79,7 @@ export function useModelCaps() {
     } else {
       loadModelCaps().then(sync);
     }
-    // Custom models change at runtime â€” drop the shared cache and refetch
+    // Custom models change at runtime — drop the shared cache and refetch
     const invalidate = () => {
       cache = null;
       loadModelCaps().then(sync);
