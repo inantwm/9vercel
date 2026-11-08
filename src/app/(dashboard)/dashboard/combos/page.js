@@ -18,8 +18,8 @@ const VALID_NAME_REGEX = /^[a-zA-Z0-9_.\-]+$/;
 // A request needing a capability the target model/combo lacks switches straight
 // to the first enabled model here instead of erroring or dropping the data.
 const CAPACITY_ADAPTER_CAPS = [
-  { key: "vision", label: "Vision", icon: "visibility", desc: "images (png, jpg, webp, Ã¢â‚¬Â¦)" },
-  // pdf, videoInput temporarily hidden Ã¢â‚¬â€ no translator support yet for those blocks.
+  { key: "vision", label: "Vision", icon: "visibility", desc: "images (png, jpg, webp, …)" },
+  // pdf, videoInput temporarily hidden — no translator support yet for those blocks.
   { key: "audioInput", label: "Audio", icon: "graphic_eq", desc: "audio input" },
 ];
 const DEFAULT_FALLBACK_MODEL = "oc/mimo-v2.6-flash-free";
@@ -48,10 +48,10 @@ function normalizeCapEntry(entry) {
 }
 
 const STRATEGY_OPTIONS = [
-  { value: "fallback", label: "Fallback Ã¢â‚¬â€ try in order" },
-  { value: "round-robin", label: "Round Robin Ã¢â‚¬â€ rotate" },
-  { value: "smart", label: "Smart Router Ã¢â‚¬â€ System One" },
-  { value: "fusion", label: "Fusion Ã¢â‚¬â€ panel + judge" },
+  { value: "fallback", label: "Fallback — try in order" },
+  { value: "round-robin", label: "Round Robin — rotate" },
+  { value: "smart", label: "Smart Router — System One" },
+  { value: "fusion", label: "Fusion — panel + judge" },
 ];
 
 function getPolicyBadgeLabel(strategy = {}) {
@@ -61,9 +61,9 @@ function getPolicyBadgeLabel(strategy = {}) {
   if (policy === "custom") {
     const raw = strategy.confidenceThreshold;
     const pct = Math.round((raw || 0.8) * (raw && raw <= 1 ? 100 : 1));
-    return `Custom (Ã¢â€°Â¥${pct || 80}%)`;
+    return `Custom (â‰¥${pct || 80}%)`;
   }
-  return "Smart (Ã¢â€°Â¥80%)";
+  return "Smart (â‰¥80%)";
 }
 
 export default function CombosPage() {
@@ -148,7 +148,7 @@ export default function CombosPage() {
 
       setConfirmState({
         title: `Generate ${label}`,
-        message: `Create ${toCreate} combo${toCreate === 1 ? "" : "s"} named like ${source === "cursor" ? "Cursor" : "Claude"} model IDs (seeded with cu/Ã¢â‚¬Â¦ or cc/Ã¢â‚¬Â¦). ${toSkip} already exist and will be skipped. You can edit any combo afterward to add fallbacks.`,
+        message: `Create ${toCreate} combo${toCreate === 1 ? "" : "s"} named like ${source === "cursor" ? "Cursor" : "Claude"} model IDs (seeded with cu/… or cc/…). ${toSkip} already exist and will be skipped. You can edit any combo afterward to add fallbacks.`,
         confirmText: "Generate",
         variant: "primary",
         onConfirm: async () => {
@@ -397,13 +397,13 @@ export default function CombosPage() {
             Group models under one name, then pick a strategy per combo:
           </p>
           <ul className="text-sm text-text-muted mt-2 flex flex-col gap-1">
-            <li><span className="font-medium text-text-main">Fallback</span> Ã¢â‚¬â€ tries models in order (next on failure)</li>
-            <li><span className="font-medium text-text-main">Round Robin</span> Ã¢â‚¬â€ rotates models across requests to spread load</li>
-            <li><span className="font-medium text-text-main">Smart Router</span> Ã¢â‚¬â€ queries a System One decision model to pick the optimal model before generation; supports Smart Switch (adaptive hysteresis), Strict Lock (1 task = 1 session, +0ms latency), and Per-Turn modes to maximize prompt-cache retention</li>
-            <li><span className="font-medium text-text-main">Fusion</span> Ã¢â‚¬â€ queries all models in parallel, then a judge synthesizes one answer. Best quality, but costs the most: every request bills all panel models + the judge (N+1 calls)</li>
+            <li><span className="font-medium text-text-main">Fallback</span> — tries models in order (next on failure)</li>
+            <li><span className="font-medium text-text-main">Round Robin</span> — rotates models across requests to spread load</li>
+            <li><span className="font-medium text-text-main">Smart Router</span> — queries a System One decision model to pick the optimal model before generation; supports Smart Switch (adaptive hysteresis), Strict Lock (1 task = 1 session, +0ms latency), and Per-Turn modes to maximize prompt-cache retention</li>
+            <li><span className="font-medium text-text-main">Fusion</span> — queries all models in parallel, then a judge synthesizes one answer. Best quality, but costs the most: every request bills all panel models + the judge (N+1 calls)</li>
           </ul>
           <p className="hidden text-xs text-text-muted mt-3 max-w-2xl">
-            <span className="font-medium text-text-main">Cursor / Claude Default</span> create combos named exactly like those clients&apos; model IDs (e.g. <code className="font-mono">composer-2.5</code>, <code className="font-mono">opus</code>), seeded with the matching <code className="font-mono">cu/Ã¢â‚¬Â¦</code> or <code className="font-mono">cc/Ã¢â‚¬Â¦</code> route so traffic can hit 9router without the prefix.
+            <span className="font-medium text-text-main">Cursor / Claude Default</span> create combos named exactly like those clients&apos; model IDs (e.g. <code className="font-mono">composer-2.5</code>, <code className="font-mono">opus</code>), seeded with the matching <code className="font-mono">cu/…</code> or <code className="font-mono">cc/…</code> route so traffic can hit 9router without the prefix.
             {" "}Note: Cursor IDE itself often blocks built-in Composer / Grok from Override OpenAI Base URL (&quot;model does not support custom API&quot;); add them via Cursor&apos;s <span className="font-medium text-text-main">Add Custom Model</span> using the combo name, or pick a model Cursor allows through the custom endpoint.
           </p>
         </div>
@@ -416,7 +416,7 @@ export default function CombosPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search combosÃ¢â‚¬Â¦"
+              placeholder="Search combos…"
               aria-label="Search combos"
               className="w-full rounded-[10px] border border-transparent bg-surface-2 py-2 pl-10 pr-9 text-sm text-text-main transition-all duration-150 ease-out placeholder-text-muted/70 focus:border-brand-500/40 focus:outline-none focus:ring-2 focus:ring-brand-500/30"
             />
@@ -508,7 +508,7 @@ export default function CombosPage() {
                     <Select
                       options={STRATEGY_OPTIONS}
                       value=""
-                      placeholder="Set strategyÃ¢â‚¬Â¦"
+                      placeholder="Set strategy…"
                       disabled={bulkBusy}
                       onChange={(e) => {
                         const v = e.target.value;
@@ -548,7 +548,7 @@ export default function CombosPage() {
                 return (
                   <Card>
                     <div className="text-center py-10">
-                      <p className="text-text-main font-medium mb-1">No combos match Ã¢â‚¬Å“{searchQuery.trim()}Ã¢â‚¬Â</p>
+                      <p className="text-text-main font-medium mb-1">No combos match “{searchQuery.trim()}”</p>
                       <p className="text-sm text-text-muted mb-4">Try a shorter query, or clear the search to see all {combos.length} combos.</p>
                       <Button variant="secondary" onClick={() => setSearchQuery("")}>
                         Clear search
@@ -721,7 +721,7 @@ function ComboCard({ combo, getCaps, comboByName = {}, activeProviders = [], cop
             {comboCaps && (
               <div className="mt-1 flex items-center gap-2 text-[10px] text-text-muted">
                 <span>ctx {fmtK(comboCaps.contextWindow)}</span>
-                <span className="opacity-40">Ã‚Â·</span>
+                <span className="opacity-40">·</span>
                 <span>max {fmtK(comboCaps.maxOutput)}</span>
               </div>
             )}
@@ -735,7 +735,7 @@ function ComboCard({ combo, getCaps, comboByName = {}, activeProviders = [], cop
                   title="Pick the model that fuses panel answers"
                 >
                   <span className="material-symbols-outlined text-[13px]">gavel</span>
-                  <span className="truncate">{judge || `Auto Ã¢â‚¬â€ ${displayModels[0] || "first model"}`}</span>
+                  <span className="truncate">{judge || `Auto — ${displayModels[0] || "first model"}`}</span>
                 </button>
                 {judge && (
                   <button
@@ -761,7 +761,7 @@ function ComboCard({ combo, getCaps, comboByName = {}, activeProviders = [], cop
                     title="Pick the System One model that decides model routing"
                   >
                     <span className="material-symbols-outlined text-[13px]">psychology</span>
-                    <span className="truncate">{routerModel || "Auto Ã¢â‚¬â€ oc/jev-1.13-free"}</span>
+                    <span className="truncate">{routerModel || "Auto — oc/jev-1.13-free"}</span>
                   </button>
                   {routerStatus.ready ? (
                     <Badge variant="success" size="sm" dot>{routerStatus.label}</Badge>
@@ -802,7 +802,7 @@ function ComboCard({ combo, getCaps, comboByName = {}, activeProviders = [], cop
 
         {/* Actions */}
         <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center sm:gap-3 sm:shrink-0">
-          {/* Strategy selector Ã¢â‚¬â€ always visible */}
+          {/* Strategy selector — always visible */}
           <div className="w-full sm:w-[200px]">
             <Select
               options={STRATEGY_OPTIONS}
@@ -959,7 +959,7 @@ function CapacityAdapterCap({ cap, entry, onChange, activeProviders, getCaps }) 
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5">
               <code className="font-mono text-sm font-medium">{cap.label}</code>
-              <span className="text-[10px] text-text-muted">Ã¢â‚¬â€ {cap.desc}</span>
+              <span className="text-[10px] text-text-muted">— {cap.desc}</span>
             </div>
           </div>
         </div>
@@ -1094,7 +1094,7 @@ function ModelItem({ id, index, model, isFirst, isLast, onEdit, onMoveUp, onMove
   const { attributes, listeners, setNodeRef, transform, isDragging } = useSortable({ id });
   const style = {
     transform: CSS.Transform.toString(transform),
-    // no transition Ã¢â‚¬â€ prevents the CSS settle animation fighting React's re-render on drop
+    // no transition — prevents the CSS settle animation fighting React's re-render on drop
     opacity: isDragging ? 0.4 : 1,
     zIndex: isDragging ? 999 : undefined,
   };
