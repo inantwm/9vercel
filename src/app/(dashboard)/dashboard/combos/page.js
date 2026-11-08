@@ -633,6 +633,16 @@ const fmtK = (n) => {
   return `${Math.round(n / 1000)}k`;
 };
 
+// Combo model entries are normally plain "provider/model" strings, but the
+// Postgres-backed repos can hand back entry objects — normalize either shape
+// to a display string. (This helper was referenced by ComboCard but never
+// defined, which crashed the Combos page whenever a combo existed.)
+const toModelString = (m) => {
+  if (typeof m === "string") return m;
+  if (m && typeof m === "object") return m.model || m.id || m.name || "";
+  return "";
+};
+
 function getRouterModelStatus(routerModel, activeProviders) {
   const effectiveModel = (typeof routerModel === "string" && routerModel.trim())
     ? routerModel.trim()
